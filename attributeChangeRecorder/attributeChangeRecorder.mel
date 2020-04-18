@@ -1,0 +1,192 @@
+// Updated on 09/07/2013 @ 01:34 PM.
+
+global proc attributeChange()
+{
+	if(`window -exists "gcWin"`) deleteUI gcWin;
+	window -title "Attribute Change Recorder" gcWin;
+	rowLayout -nc 4;
+	button -w 60 -label "Record" -c "scriptEditorInfo -historyFilename \"commandLog.txt\" -writeHistory on;"bR;
+	button -w 60 -label "Stop" -c "scriptEditorInfo -writeHistory off;" bS;
+	button -w 45 -label "Rewind" -c "rewind();" bRw;
+	button -w 60 -label "Play" -c "mainAttributeChange();" bP;
+	showWindow;
+}
+
+
+global proc rewind()
+{
+	$fileName = (`internalVar -uad` + "commandLog.txt");
+	$f1 = `fopen $fileName "w"`;
+	fclose $f1;
+}
+
+
+global proc mainAttributeChange()
+{
+
+	string $finalCommand[2];
+	string $type;
+	string $totalArray[] = getLog();
+	string $setCmmds[] = getSet($totalArray);
+	string $sameType[];
+	int $noOfSets = size($setCmmds);
+	for($eachSet in $setCmmds)
+	{
+		$finalCommand = getNode($eachSet);
+		$type = getNodeType($finalCommand[0]);
+		clear $sameType;
+		$sameType = getAllOfThisType($type);
+		for($eachSameType in $sameType)
+		{
+			eval("setAttr \""+ $eachSameType + "." + $finalCommand[1] +"\" " + $finalCommand[2]);
+		}
+	}
+
+}
+
+
+global proc string[] getAllOfThisType(string $typeName)
+{
+
+	string $nodeType = $typeName;	
+	string $selObjs[] = `ls -selection`;
+	string $selObjShp[];
+	string $objShp;
+	string $reqdNodes[];
+	int $total;
+	string $isMatch;
+	int $k=0;
+	if($nodeType=="transform")
+		$reqdNodes = $selObjs;
+	else
+	{
+		for($eachNode in $selObjs)
+		{
+			
+			$isMatch = searchForType($eachNode,$nodeType);
+			if($isMatch!="Invalid")
+			{
+				$reqdNodes[$k]= $isMatch;
+				$k=$k+1;
+			}
+		}
+	}
+
+}
+
+
+global proc string searchForType(string $selNode,string $nodeType)
+{
+	
+	
+	string $selObjShp[] = `listRelatives -s $selNode`;
+	$objShp = $selObjShp[0];
+	string $otherConns[];
+	string $chkShpType[] = `ls -st $objShp`;
+	if($chkShpType[1] == $nodeType)
+	{
+		return $selObjShp[0];
+	}
+	else 
+	{
+		$otherConns = `listConnections -t $nodeType $selObjShp[0]`;
+		if($otherConns[0]!="")
+			return $otherConns[0];
+		else return "Invalid";
+	}
+	
+
+}
+
+
+global proc string[] getNode(string $whole)
+{
+
+	string $wholeCmd = $whole;
+	string $cmdBreak[];
+	string $nodeNattr;
+	string $parts[];
+	string $nodeName,$attrName;
+	string $finalCmd[];
+	string $value;
+	
+	$cmdBreak = stringToStringArray($wholeCmd," \"");
+
+	$nodeNattr = $cmdBreak[1];
+	int $chkColor = size($cmdBreak);
+	for($i=2;$i<=$chkColor-1;$i++)
+		$value = $value + $cmdBreak[$i]+ " ";
+	
+	$parts = stringToStringArray($nodeNattr,".");
+	$nodeName = $parts[0];
+	
+	if(size($parts)>2)
+		$attrName = $parts[1] + "." + $parts[2];
+	else $attrName = $parts[1];
+	
+	$finalCmd[0] = $nodeName;
+	$finalCmd[1] = $attrName;
+	$finalCmd[2] = $value;
+	
+	return $finalCmd;
+
+}	
+
+		
+global proc string getNodeType(string $nodeName)
+{
+	string $result[] = `ls -st $nodeName`;
+	return $result[1];
+}
+
+
+global proc string[] getLog()
+{
+	string $array[];
+	string $cArray[];
+	$fileName = (`internalVar -uad` + "commandLog.txt");
+	$fileId = `fopen $fileName "r"`;
+	int $i = 0;
+	int $k=0;
+	do
+	{
+		$array[$i] = `fgetline $fileId`;
+		$cArray[$k] = $array[$i];
+		$k++;
+	}while (size($array[$i])>0);
+
+
+	fclose $fileId;
+	
+
+	return $cArray;
+}
+
+
+global proc string[] getSet(string $all[])
+{
+
+	string $allCmmds[] = $all;
+	string $setArray[];
+	int $noOfCmds = size($allCmmds);
+	int $k=0;
+	for($i=0;$i<=$noOfCmds-1;$i++)
+	{	
+		if(startsWith($allCmmds[$i],"setAttr"))
+		{
+			$pipeChk = `match "|" $allCmmds[$i]`;
+			if ($pipeChk=="")
+			{
+				
+				$setArray[$k] = $allCmmds[$i];
+				$k++;
+			}
+		}
+	}
+
+	return $setArray;
+
+}
+
+attributeChange();
+
