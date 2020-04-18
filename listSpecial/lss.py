@@ -1,3 +1,15 @@
+"""
+Coded by Sudarshan Havale at 05-08-2019
+
+List Special Shell Command:
+    -Returns unique file patterns and details in structured format.
+
+Uses:
+    -Provide directory path as an argument to display file information from specified location.
+
+Example:
+    -python /script/path/lss.py -path "/target/directory/"
+"""
 
 # python imports
 import argparse
@@ -36,6 +48,7 @@ class ListSpecial(object):
 
     def __unify_patterns(self):
         """Unify all unique file patterns and their frame numbers
+
         :return: dictionary of unique file patterns as keys and
         list of frame numbers as values.
         """
