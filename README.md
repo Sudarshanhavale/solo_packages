@@ -48,4 +48,18 @@ to get a similar look. In the given [demonstration](https://youtu.be/bcltw87ySDg
 generated approximately 5 to 10 different snow varieties on 
 complex objects nearly in 10 mins.
 
-
+* **Tree Generator:**
+A Tree Generator tool helps artists to procedurally generate 
+Artificial as well as Natural trees in less time. This tool 
+has many artistic controls that allow artists to modify almost 
+any part of the produced trees at any time. It has leaves instancing 
+mechanism which is one of big factor of this tool but that time
+I used SOUP nodes for instancing but I guess I can now switch 
+to MASH nodes that come along with Maya. Here is [demonstration](https://youtu.be/MkQ5fe5-eOI "Tree Generator Tool") of tree generator.
+    
+    ```
+    Note: I have developed this tool somewhere around May 2016. 
+    It's Mostly written in mel programming and also uses some old school techniques.
+    Apparently Autodesk has done many improvements in Maya so I am thinking of updating this tool further.
+    ```
+ 

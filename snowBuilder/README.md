@@ -3,7 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Demonstration](https://youtu.be/bcltw87ySDg "Snow Builder")
-* [Actions](#RMB Actions)
+* [RMB Actions](#RMB Actions)
 * [Uses](#Uses)
 * [Installation Guide](#Installation Guide)
 * [ToDo](#ToDo)
@@ -23,7 +23,7 @@ around complex shapes in very less amount of time.
 * Freeze Simulation
 * Set To Dynamic
 * Bake Current Output
-
+ 
 ## Uses
 * Import any example setup from Maya content browser.
 * Assign to the object on which you want to generate snow.
