@@ -3,7 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Demonstration](https://youtu.be/bcltw87ySDg "Snow Builder")
-* [Actions](#RMB Actions)
+* [RMB Actions](#RMB Actions)
 * [Uses](#Uses)
 * [Installation Guide](#Installation Guide)
 * [ToDo](#ToDo)
