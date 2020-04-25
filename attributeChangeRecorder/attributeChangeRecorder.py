@@ -42,8 +42,8 @@ def main_ui():
     win = cmds.window(win_name, mxb=False)
 
     cmds.rowLayout(numberOfColumns=4)
-    cmds.button(label='Record', command="pm.scriptEditorInfo(hfn= 'commandLog.txt', wh=1)", width=60)
-    cmds.button(label='Stop', command="pm.scriptEditorInfo(hfn= 'commandLog.txt', wh=0)", width=60)
+    cmds.button(label='Record', command="cmds.scriptEditorInfo(hfn= 'commandLog.txt', wh=1)", width=60)
+    cmds.button(label='Stop', command="cmds.scriptEditorInfo(hfn= 'commandLog.txt', wh=0)", width=60)
     cmds.button(label='Rewind', command="rewind()", width=60)
     cmds.button(label='Play', command="apply_changes()", width=60)
 
@@ -141,7 +141,7 @@ def unpack_command(log_command=None):
     split_command = re.split(' *" *', log_command)
 
     process = split_command[0]
-    node_name, attribute_name = split_command[1].split(".")
+    node_name, attribute_name = split_command[1].split(".", 1)
     value = split_command[-1]
 
     return process, node_name, attribute_name, value

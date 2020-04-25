@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<templates>
+	<using package='maya'/>
+	<using package='std'/>
+	<template name='snowBuilder'>
+		<attribute name='isDynamic' type='maya.bool'>
+			<label>Is Dynamic</label>
+		</attribute>
+		<attribute name='rate' type='maya.double'>
+			<label>Rate</label>
+		</attribute>
+		<attribute name='threshold' type='maya.double'>
+			<label>Threshold</label>
+		</attribute>
+		<attribute name='enableTextureRate' type='maya.bool'>
+			<label>Enable Texture Rate</label>
+		</attribute>
+		<attribute name='blobbyRadiusScale' type='maya.double'>
+			<label>Blobby Radius Scale</label>
+		</attribute>
+		<attribute name='meshTriangleSize' type='maya.double'>
+			<label>Mesh Triangle Size</label>
+		</attribute>
+		<attribute name='maxTriangleResolution' type='maya.long'>
+			<label>Max Triangle Resolution</label>
+		</attribute>
+		<attribute name='meshMethod' type='maya.enum'>
+			<label>Mesh Method</label>
+		</attribute>
+		<attribute name='meshSmoothingIterations' type='maya.long'>
+			<label>Mesh Smoothing Iterations</label>
+		</attribute>
+		<attribute name='offset' type='maya.doubleLinear'>
+			<label>Offset</label>
+		</attribute>
+		<attribute name='textureRate' type='maya.float3'>
+			<label>Texture Rate</label>
+		</attribute>
+		<attribute name='RootTransform' type='std.RootTransform'>
+			<label>Root Transform</label>
+		</attribute>
+	</template>
+	<view name='snowBuilder' template='snowBuilder'>
+		<group name='EmissionControls'>
+			<property name='isDynamic'>
+				<label>Is Dynamic</label>
+				<description>Turn On/Off dynamic emission per frame.</description>
+			</property>
+			<property name='rate'>
+				<label>Emission Rate</label>
+				<description>Define emission rate per second.</description>
+			</property>
+			<property name='enableTextureRate'>
+				<label>Enable Mask</label>
+				<description>Turn On/Off pre particle emission mask.</description>
+			</property>
+			<property name='textureRate'>
+				<label>Emission Mask</label>
+				<description>Particle emission mask.</description>
+			</property>
+		</group>
+		<group name='SurfaceControls'>
+			<property name='threshold'>
+				<label>Threshold</label>
+				<description>Prefer low values for large scale objects</description>
+			</property>
+			<property name='blobbyRadiusScale'>
+				<label>Surface Swelling</label>
+				<description>Increase or decrees surface volume.</description>
+			</property>
+			<property name='meshTriangleSize'>
+				<label>Faces Density</label>
+				<description>Size of the triangles used to create surface.</description>
+			</property>
+			<property name='maxTriangleResolution'>
+				<label>Max Faces Resolution</label>
+				<description>Clamps the resolution of the voxel grid</description>
+			</property>
+		</group>
+		<group name='OutputControls'>
+			<property name='meshMethod'>
+				<label>Mesh Method</label>
+				<description>Define Mesh type.</description>
+			</property>
+			<property name='meshSmoothingIterations'>
+				<label>Smooth Iterations</label>
+				<description>Define mesh smooth level.</description>
+			</property>
+			<property name='offset'>
+				<label>Shrink Volume</label>
+				<description>Surface volume local offset.</description>
+			</property>
+		</group>	
+	</view>	
+</templates>

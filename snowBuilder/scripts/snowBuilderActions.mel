@@ -1,0 +1,96 @@
+// Snow Builder System Right Mouse Button Actions
+// These are actions written in mel language but not in the use
+// currently as enhanced version of these actions are written in python.
+
+
+global proc setCurrentSBVars()
+{
+	global string $growthMesh[];
+	global string $snowBuilderAsset[];
+	global string $particleNode[];
+    global string $growthMesh[];
+    global string $snowMesh[];
+    global string $geoConnector[];
+
+	string $sel[] = `ls -sl`;
+	$snowBuilderAsset = `ls -sl -type container`;
+	if(size($snowBuilderAsset) != 0)
+	{
+		string $containerCategory = `getAttr -as ($snowBuilderAsset[0] + ".containerCategory")`;
+		if($containerCategory == "SNOW_BUILDER")
+		{
+			$particleNode = `listConnections -sh on ($snowBuilderAsset[0] + ".particleNode")`;
+			$growthMesh = `listConnections -sh on ($snowBuilderAsset[0] + ".growthMesh")`;
+			$snowMesh = `listConnections -sh on ($snowBuilderAsset[0] + ".snowMesh")`;
+			$geoConnector = `listConnections -sh on ($snowBuilderAsset[0] + ".geoConnector")`;
+		}
+	}
+	else
+	{
+		print "Invalid Selection, Please Select Snow Builder Asset Node.\n";
+	}
+}
+
+global proc assignGrowthMeshSB(string $object)
+{
+	global string $growthMesh[];
+	global string $snowBuilderAsset[];
+	global string $particleNode[];
+    global string $growthMesh[];
+    global string $snowMesh[];
+    global string $geoConnector[];
+    setCurrentSBVars;
+
+	string $newGrowthMesh[] = `listRelatives -f -s -type "mesh"`;
+	catchQuiet(`connectAttr -force ($newGrowthMesh[0] + ".message") ($snowBuilderAsset[0] + ".growthMesh")`);
+    catchQuiet(`connectAttr -f ($newGrowthMesh[0] + ".message") ($geoConnector[0] + ".owner")`);
+    catchQuiet(`connectAttr -f ($newGrowthMesh[0] + ".outMesh") ($geoConnector[0] + ".localGeometry")`);
+    catchQuiet(`connectAttr -f ($newGrowthMesh[0] + ".worldMatrix[0]") ($geoConnector[0] + ".worldMatrix")`);
+
+}
+
+global proc bakeSnowMeshSB(string $object)
+{
+  	global string $growthMesh[];
+	global string $snowBuilderAsset[];
+	global string $particleNode[];
+    global string $growthMesh[];
+    global string $snowMesh[];
+    global string $geoConnector[];
+    setCurrentSBVars;
+
+    string $bakedSnowMesh[] = `duplicate -rr $snowMesh[0]`;
+    rename $bakedSnowMesh[0] "SnowMesh_01";
+}
+
+global proc stopSimulation(string $object)
+{
+  	global string $growthMesh[];
+	global string $snowBuilderAsset[];
+	global string $particleNode[];
+    global string $growthMesh[];
+    global string $snowMesh[];
+    global string $geoConnector[];
+    setCurrentSBVars;
+
+    select $particleNode[0];
+    pickWalk -d up;
+    setDynStartState;
+    setAttr($particleNode[0] + ".isDynamic") 0;
+}
+
+global proc startSimulation(string $object)
+{
+  	global string $growthMesh[];
+	global string $snowBuilderAsset[];
+	global string $particleNode[];
+    global string $growthMesh[];
+    global string $snowMesh[];
+    global string $geoConnector[];
+    setCurrentSBVars;
+
+    select $particleNode[0];
+    pickWalk -d up;
+    clearDynStartState;
+    setAttr($particleNode[0] + ".isDynamic") 1;
+}

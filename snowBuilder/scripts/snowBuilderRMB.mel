@@ -1,0 +1,13 @@
+// Coded by Sudarshan Havale at 11-03-2019
+// Snow Builder System Right Mouse Button
+// This Script Is Responsible To Populate Right Mouse Button Menu For The SnowBuilder Container.
+
+global proc string[] snowBuilderRMB()
+{
+	return {
+			 "Assign Selected Emitter", "python(\"import snowBuilderActions;snowBuilderActions.assign_emitter()\")",
+			 "Freeze Simulation" , "python(\"import snowBuilderActions;snowBuilderActions.freeze_simulation()\")",
+			 "Set To Dynamic" , "python(\"import snowBuilderActions;snowBuilderActions.back_to_dynamic()\")",
+			 "Bake Current Output" , "python(\"import snowBuilderActions;snowBuilderActions.bake_output()\")"
+	       };
+}
