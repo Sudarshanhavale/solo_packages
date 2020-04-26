@@ -12,15 +12,6 @@ This Project contains helpful production tools for the Vfx Artists.
 * Python version: 2.7
 	
 ## Packages
-* **List Special:** 
-Returns unique file patterns and details in structured format.
-Its helps many departments like ingestion, dmp, lighting, compositing 
-to understand and verify their files/sequences. eg: Lighting and 
-compositers could be able to find missing frames easily and 
-ingestion team would be able to find out patterns out of massive 
-files data they receive from client. 
-Here is a quick [demonstration](https://youtu.be/bqmVw71gWZQ "List Special") of visual understanding.   
-
 * **Attribute Change Recorder:** 
 This tool records attribute changes happening in the selected 
 object and apply the same on multiple selections. Usually, 
@@ -35,6 +26,15 @@ to use. This is mainly useful for rigging, animation, layout,
 environment, and lighting as they play a lot with a set of 
 attributes on a daily bases.
 Here is a quick [demonstration](https://youtu.be/oN4bzeRd7xY "AttributeChangeRecorder") for visual understanding.
+
+* **List Special:** 
+Returns unique file patterns and details in structured format.
+Its helps many departments like ingestion, dmp, lighting, compositing 
+to understand and verify their files/sequences. eg: Lighting and 
+compositers could be able to find missing frames easily and 
+ingestion team would be able to find out patterns out of massive 
+files data they receive from client. 
+Here is a quick [demonstration](https://youtu.be/bqmVw71gWZQ "List Special") of visual understanding.   
 
 * **SnowBuilder Tool:**
 This Snow setup tool helps CG artists to procedurally built 
