@@ -61,5 +61,4 @@ to MASH nodes that come along with Maya. Here is [demonstration](https://youtu.b
     Note: I have developed this tool somewhere around May 2016. 
     It's Mostly written in mel programming and also uses some old school techniques.
     Apparently Autodesk has done many improvements in Maya so I am thinking of updating this tool further.
-    ```
- 
+    ```
