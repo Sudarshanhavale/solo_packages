@@ -62,3 +62,11 @@ to MASH nodes that come along with Maya. Here is [demonstration](https://youtu.b
     It's Mostly written in mel programming and also uses some old school techniques.
     Apparently Autodesk has done many improvements in Maya so I am thinking of updating this tool further.
     ```
+
+* **Silhouette:**
+The silhouette tool reveals only the borderline of the given CG 
+target with the applied x-ray effect on the rest of the area. 
+This is very helpful for VFX artists while matching CG animation 
+with the real shoot plates. Also, the toggling feature helps 
+Artists to quickly review the outcome by swapping this entire 
+effect. Here is a quick [demonstration](https://youtu.be/yCa3Pp88fLs "Maya Silhouette Tool") of the Silhouette Tool.
